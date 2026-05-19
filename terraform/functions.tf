@@ -33,6 +33,11 @@ resource "azurerm_windows_function_app" "main" {
   storage_account_name       = azurerm_storage_account.main.name
   storage_account_access_key = azurerm_storage_account.main.primary_access_key
 
+  # Key Vault 参照に必要なシステム割り当てマネージド ID
+  identity {
+    type = "SystemAssigned"
+  }
+
   site_config {
     application_stack {
       dotnet_version              = "v8.0"
@@ -46,15 +51,12 @@ resource "azurerm_windows_function_app" "main" {
     FUNCTIONS_EXTENSION_VERSION = "~4"
     WEBSITE_RUN_FROM_PACKAGE    = "1"
 
-    # SQL connection string (injected at apply time)
-    SqlConnectionString = "Server=tcp:${azurerm_mssql_server.main.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.main.name};Persist Security Info=False;User ID=${var.sql_admin_user};Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    # 機密情報は Key Vault 参照で読み込む（平文をアプリ設定に持たない）
+    SqlConnectionString     = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=SqlConnectionString)"
+    StorageConnectionString = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=StorageConnectionString)"
+    AcsConnectionString     = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=AcsConnectionString)"
 
-    # Blob Storage
-    StorageConnectionString = azurerm_storage_account.main.primary_connection_string
-    ResultsContainerName    = azurerm_storage_container.results.name
-
-    # ACS (populated after ACS resource is provisioned)
-    AcsConnectionString = azurerm_communication_service.main.primary_connection_string
+    ResultsContainerName = azurerm_storage_container.results.name
   }
 
   tags = local.tags
