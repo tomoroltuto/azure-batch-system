@@ -47,7 +47,7 @@ resource "azurerm_windows_function_app" "main" {
     WEBSITE_RUN_FROM_PACKAGE    = "1"
 
     # SQL connection string (injected at apply time)
-    SqlConnectionString = "Server=tcp:${azurerm_mssql_server.main.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.main.name};Persist Security Info=False;User ID=${var.sql_admin_login};Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    SqlConnectionString = "Server=tcp:${azurerm_mssql_server.main.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.main.name};Persist Security Info=False;User ID=${var.sql_admin_user};Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 
     # Blob Storage
     StorageConnectionString = azurerm_storage_account.main.primary_connection_string

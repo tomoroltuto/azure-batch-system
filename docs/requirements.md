@@ -19,19 +19,7 @@ Azureのマネージドサービスを活用し、定期的にデータベース
 
 ## 2. システムアーキテクチャ
 
-```
-Timer Trigger（定期実行）
-        ↓
-Azure Functions（C# / .NET 8 Isolated）
-        ↓
-Azure SQL Database
-        ↓ ストアドプロシージャ実行・結果取得
-        ↓
-  ┌─────────────────────────┐
-  │                         │
-Azure Blob Storage       メール送信
-（結果データをJSON保存）  （Azure Communication Services）
-```
+![システムアーキテクチャ](images/architecture.jpg)
 
 ---
 

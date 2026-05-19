@@ -1,3 +1,29 @@
+# Azure Service Principal / Subscription
+variable "subscription_id" {
+  description = "Azure Subscription ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "client_id" {
+  description = "Service Principal application (client) ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "client_secret" {
+  description = "Service Principal client secret"
+  type        = string
+  sensitive   = true
+}
+
+variable "tenant_id" {
+  description = "Azure Active Directory tenant ID"
+  type        = string
+  sensitive   = true
+}
+
+# General
 variable "project_name" {
   description = "Project name used as resource name prefix"
   type        = string
@@ -16,7 +42,7 @@ variable "location" {
 }
 
 # SQL
-variable "sql_admin_login" {
+variable "sql_admin_user" {
   description = "SQL Server administrator login name"
   type        = string
   sensitive   = true
