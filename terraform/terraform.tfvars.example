@@ -1,0 +1,14 @@
+project_name = "batchsys"
+environment  = "dev"
+location     = "japaneast"
+
+# SQL Server credentials (change before applying)
+sql_admin_login    = "sqladmin"
+sql_admin_password = "P@ssw0rd!ChangMe"
+
+# SQL SKU: Basic / S0 / S1 / GP_S_Gen5_1 etc.
+sql_sku_name = "Basic"
+
+# Functions plan: Dynamic/Y1 = Consumption, ElasticPremium/EP1 = Premium
+functions_sku_tier = "Dynamic"
+functions_sku_size = "Y1"

@@ -1,0 +1,36 @@
+# Terraform
+terraform/terraform.tfvars
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/crash.log
+terraform/*.tfplan
+terraform/override.tf
+terraform/override.tf.json
+terraform/*_override.tf
+terraform/*_override.tf.json
+
+# Azure credentials
+*.publishsettings
+.azure/
+
+# .NET / C#
+functions/bin/
+functions/obj/
+functions/*.user
+functions/.vs/
+functions/local.settings.json
+functions/appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
